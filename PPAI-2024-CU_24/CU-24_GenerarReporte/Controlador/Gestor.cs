@@ -19,7 +19,8 @@ namespace CU_24_GenerarReporte.Controlador
         public string TipoVisualizacion { get; set; }
 
         private PantallaPrincipal pantallaPrincipalAtributo;
-        
+
+        List<(string, decimal, string, string, string, List<string>)> listaVinosValidados = new List<(string, decimal, string, string, string, List<string>)>();
 
         public Gestor(List<Vino> listaVinos, DateTime fechaDesde, DateTime fechaHasta, string tipoReseña, string tipoVisualizacion, PantallaPrincipal principal)
         {
@@ -65,36 +66,42 @@ namespace CU_24_GenerarReporte.Controlador
 
         {
             List<Vino> vinosAgregados = new List<Vino>();
-            List<string> nombreVinosAgregados = new List<string>();
-            List<decimal> precioVinosAgregados = new List<decimal>();
-            List<string> nombreBodegaAgregados = new List<string>();
-            List<List<string>> listaRegionPais = new List<List<string>>();
-            List<List<string>> listaVarietales = new List<List<string>>();
-            List<List<Object>> listaVinosConDatos = new List<List<Object>>();
+
+
+            List<> listaVinosValidados = new List<(string, decimal, string, string, string, List<string>)>();
+            List<Vino> listaDeObjetosVino = new List<Vino>();
 
             foreach (Vino vino in ListaVinos)
             {
-                Vino vinoConSommelierYPeriodo = vino.tenesReseñasDeTipoEnPeriodo(vino,FechaDesde,FechaHasta);
+                Vino vinoConSommelierYPeriodo = vino.tenesReseñasDeTipoEnPeriodo(vino, FechaDesde, FechaHasta);
                 if (vinoConSommelierYPeriodo != null)
                 {
                     vinosAgregados.Add(vinoConSommelierYPeriodo);
-                    nombreVinosAgregados.Add(vinoConSommelierYPeriodo.Nombre);
-                    precioVinosAgregados.Add(vinoConSommelierYPeriodo.PrecioARS);
-                    nombreBodegaAgregados.Add(vinoConSommelierYPeriodo.Bodega.Nombre);
-                    listaRegionPais.Add(vinoConSommelierYPeriodo.Bodega.obtenerRegionYPais());
-                    listaVarietales.Add(vinoConSommelierYPeriodo.buscaVarietal());
-                    
                 }
+                
             }
-            vinosAgregados = vinosAgregados;
-            nombreVinosAgregados = nombreVinosAgregados;
-            nombreBodegaAgregados = nombreBodegaAgregados;
-            listaRegionPais = listaRegionPais;
-            listaVarietales = listaVarietales;
-
+            foreach (Vino vinoValidado in vinosAgregados)
+            {
+                string nombreVino = vinoValidado.Nombre;
+                decimal precioVino = vinoValidado.PrecioARS;
+                string nombreBodega = vinoValidado.Bodega.Nombre;
+                string nombreRegion = vinoValidado.Bodega.obtenerRegion();
+                string nombrePais = vinoValidado.Bodega.obtenerPais();
+                List<string> listaDescVarietales = vinoValidado.buscarDescripcionDeVarietal();
+                (string, decimal, string, string, string, List<string>) tuplaDatosVinoValidado = (nombreVino, precioVino, nombreBodega, nombreRegion, nombrePais, listaDescVarietales);
+                listaVinosValidados.Add(tuplaDatosVinoValidado);
+            }
+            calcularPuntajeDeSommelierEnPeriodo(listaVinosValidados);
 
         }
 
+        public void calcularPuntajeDeSommelierEnPeriodo(List<(string, decimal, string, string, string, List<string>)>  listaVinosValidados)
+        {
+            foreach (Object objeto in listaVinosValidados)
+            {
+                o
+            }
+        }
         public void SolicitarSelFechaDesdeYHasta()
         {
 

@@ -45,14 +45,16 @@ namespace CU_24_GenerarReporte.Entidades
             //    Console.WriteLine(vino.Nombre);
             //}
         }
-        public List<string> obtenerRegionYPais()
+        public string obtenerRegion()
         {
-            string nombreRegion = Region.Nombre;
-            string nombrePais = Region.obtenerPais();
-            List<string> listaRegionYPais = new List<string>();
-            listaRegionYPais.Add(nombreRegion);
-            listaRegionYPais.Add(nombrePais);
-            return listaRegionYPais;
+            return Region.Nombre;
+            
+        }
+
+        public string obtenerPais()
+        {
+            return Region.obtenerPais();
+           
         }
     }
 }

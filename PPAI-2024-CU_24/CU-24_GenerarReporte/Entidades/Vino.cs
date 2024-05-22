@@ -74,7 +74,7 @@ namespace CU_24_GenerarReporte.Entidades
             return null;
         }
 
-        public List<string> buscaVarietal()
+        public List<string> buscarDescripcionDeVarietal()
         {
             List <string> listaDescripcionVarietales = new List <string>();
             foreach(Varietal var in Varietales)
